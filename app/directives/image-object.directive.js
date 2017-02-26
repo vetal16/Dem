@@ -7,7 +7,7 @@ angular.module('EYE')
       	element.attr('id' , ID);
 
       	var nativeElement = document.getElementById(ID);
-				console.info(loadImage(nativeElement).getImageData(0, 0, 10, 10));
+				// console.info(loadImage(nativeElement).getImageData(0, 0, 10, 10));
 
 				function loadImage(image) {
 				    var canvas = document.createElement("canvas");

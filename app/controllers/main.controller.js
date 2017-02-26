@@ -1,4 +1,19 @@
 angular.module('EYE')
-  .controller('MainCtrl', function() {
-    console.info(ss.sampleCorrelation([1, 2, 3, 4, 5, 6], [2, 2, 3, 4, 5, 60]).toFixed(2));
+  .controller('MainCtrl', MainCtrl);
+
+MainCtrl.$inject = ['MatrixService', 'CanvasService'];
+
+function MainCtrl(MatrixService, CanvasService) {
+  // console.info(ss.sampleCorrelation([1, 2, 3, 4, 5, 6], [2, 2, 3, 4, 5, 60]).toFixed(2));
+  var dim = 50,
+  		matrix = MatrixService.createRandomMatrix(dim, dim);
+
+  console.info('matrix', matrix);
+
+  // CanvasService.drawGrid(dim, dim);
+  CanvasService.drawBorder(dim, dim);
+
+  MatrixService.walkThrough(matrix, function(x, y, value) {
+  	CanvasService.drawRect(x, y, value);
   });
+};

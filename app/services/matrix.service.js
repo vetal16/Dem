@@ -3,6 +3,27 @@ angular.module('EYE')
 
 function MatrixService() {
 
+  function longTo2DArray(width, height, array) {
+    var i = 0,
+        j = 0,
+        l = 0,
+        matrix = Create2DArray(height);
+
+    while (l < array.data.length) {
+      matrix[i][j] = array.data[l];
+
+      l += 4;
+
+      i++;
+      if (i === width) {
+        j++;
+        i = 0;
+      }
+    }
+
+    return matrix;
+  }
+
   function walkThrough(matrix, callback) {
     var m = matrix[0].length,
         n = matrix.length;
@@ -25,12 +46,13 @@ function MatrixService() {
 
   function Create2DArray(rows) {
     var arr = [];
-    for (var i=0;i<rows;i++) {
+    for (var i = 0; i < rows; i++) {
        arr[i] = [];
     }
     return arr;
   }
 	return {
+    longTo2DArray: longTo2DArray,
 		createRandomMatrix: createRandomMatrix,
     walkThrough: walkThrough
 	};

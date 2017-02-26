@@ -1,5 +1,11 @@
-<!-- 
-<img src="img/image.png" image-object>
-<img src="img/template.png"> -->
+<!-- <img src="img/image.png" image-object> -->
+<img 
+	src="img/template.png" 
+	image-object name="'image'" 
+	callback="vm.loadImage(name, imageData, width, height)">
+<img 
+	src="img/element.png" 
+	image-object name="'pattern'" 
+	callback="vm.loadImage(name, imageData, width, height)">
 
 <div id="canvas-anchor"></div>

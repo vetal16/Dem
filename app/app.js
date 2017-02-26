@@ -1,9 +1,9 @@
 var app = angular.module('EYE', ['ngRoute']);
 
 app.config(function($routeProvider) {
-    $routeProvider
+  $routeProvider
     .when('/', {
-        templateUrl : 'app/templates/main.html',
-        controller: 'MainCtrl'
+      templateUrl: 'app/templates/main.html',
+      controller: 'MainCtrl'
     });
 });

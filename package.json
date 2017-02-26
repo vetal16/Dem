@@ -1,0 +1,19 @@
+{
+  "name": "eye",
+  "version": "1.0.0",
+  "description": "Computer vision app",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.5.6",
+    "angular-route": "^1.6.2",
+    "angularjs": "0.0.1",
+    "http-server": "^0.9.0",
+    "simple-statistics": "^2.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marian Turchyn",
+  "license": "ISC"
+}

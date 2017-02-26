@@ -19,9 +19,24 @@ function MainCtrl(MatrixService, CanvasService) {
 
   var vm = this;
 
+  vm.data = {
+  	image: {},
+  	pattern: {}
+  };
+
   vm.loadImage = loadImage;
 
+	console.info(vm.data);
+
   function loadImage(name, imageData, width, height) {
-  	console.info(MatrixService.longTo2DArray(width, height, imageData.getImageData(0, 0, width, height)));
+  	vm.data[name] = {
+  		name: name,
+  		width: width,
+  		height: height,
+  		array: MatrixService.longTo2DArray(
+  			width, 
+  			height, 
+  			imageData.getImageData(0, 0, width, height))
+  	};
   }
 };

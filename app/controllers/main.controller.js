@@ -19,16 +19,18 @@ function MainCtrl(MatrixService, CanvasService, $timeout) {
 
   var vm = this;
 
+  vm.K = 2;
   vm.data = {
   	image: {},
   	pattern: {}
   };
 
   vm.loadImage = loadImage;
+  vm.recognize = recognize;
 
 	console.info(vm.data);
 
-	$timeout(function() {
+	function recognize() {
 		var matrix = buildCorrelationMatrix(
 		vm.data.image.width,
 		vm.data.image.height,
@@ -38,21 +40,22 @@ function MainCtrl(MatrixService, CanvasService, $timeout) {
 		console.info(matrix);
 
 		$timeout(function() {
+			CanvasService.clean();
 			CanvasService.drawBorder(matrix.length, matrix.length);
 			MatrixService.walkThrough(matrix, function(x, y, value) {
 		  	CanvasService.drawRect(x, y, value);
 		  });
 	  }, 1000);
-	}, 1000);
-
+	}
+	
 	function buildCorrelationMatrix(imageWidth, imageHeight, patternWidth, patternHeight) {
 		var image = vm.data.image.imageData,
 				pattern = vm.data.pattern.imageData,
 				i = 0,
-				iMax = patternWidth * Math.trunc(imageWidth / patternWidth)
+				iMax = patternWidth * (Math.trunc(imageWidth / patternWidth) - 1)
 				j = 0,
-				jMax = patternHeight * Math.trunc(imageHeight / patternHeight),
-				matrix = MatrixService.create2DArray(Math.trunc(2 * imageHeight / patternHeight) + 1),
+				jMax = patternHeight * (Math.trunc(imageHeight / patternHeight) - 1),
+				matrix = MatrixService.create2DArray(Math.trunc(vm.K * imageHeight / patternHeight) - 1),
 				k = 0,
 				l = 0;
 
@@ -70,8 +73,8 @@ function MainCtrl(MatrixService, CanvasService, $timeout) {
 			l++;
 		}*/
 
-		for (j = 0; j <= jMax; j = j + Math.trunc(patternHeight / 2)) {	
-			for (i = 0; i <= iMax; i = i + Math.trunc(patternWidth / 2)) {
+		for (j = 0; j <= jMax; j = j + Math.trunc(patternHeight / vm.K)) {	
+			for (i = 0; i <= iMax; i = i + Math.trunc(patternWidth / vm.K)) {
 				loop(i, j, k, l);
 				k++;
 			}
@@ -81,7 +84,7 @@ function MainCtrl(MatrixService, CanvasService, $timeout) {
 
 		function loop(i, j, k, l) {
 			$timeout(function() {
-				console.info(i, j);
+				// console.info(i, j);
 				// console.info(k, l);
 				/*console.info('i', i, 'j', j, 'ss', correlation(
 				image.getImageData(i, j, patternWidth, patternHeight).data,

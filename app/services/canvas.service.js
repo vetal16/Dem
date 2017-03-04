@@ -5,6 +5,7 @@ CanvasService.$inject = ['ConfigService'];
 
 function CanvasService(ConfigService) {
   var CONTEXT = init('canvas-anchor', 900, 630),
+      CANVAS,
       cellWidth = ConfigService.cellWidth;
       
       CONTEXT.lineWidth = ConfigService.lineWidth;
@@ -16,6 +17,8 @@ function CanvasService(ConfigService) {
 
     canvas.width = m;
     canvas.height = n;
+
+    CANVAS = canvas;
 
     return canvas.getContext("2d");
   }
@@ -59,9 +62,15 @@ function CanvasService(ConfigService) {
     CONTEXT.stroke();
   }
 
+  function clean() {
+    console.info('clean');
+    CONTEXT.clearRect(0, 0, CANVAS.width, CANVAS.height);
+  }
+
 	return {
     drawBorder: drawBorder,
     drawGrid: drawGrid,
-    drawRect: drawRect
+    drawRect: drawRect,
+    clean: clean
 	};
 };

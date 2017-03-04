@@ -4,7 +4,7 @@ angular.module('EYE')
 
 function ConfigService() {
 	return {
-		cellWidth: 40,
+		cellWidth: 10,
 		lineWidth: 1,
 		borderColor: '#F00',
 		gridColor: '#000'

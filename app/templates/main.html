@@ -1,4 +1,6 @@
 <!-- <img src="img/image.png" image-object> -->
+<input ng-model="vm.K"/>
+<button ng-click="vm.recognize()">recognize</button>
 <img 
 	src="img/template1.png" 
 	image-object name="'image'" 
@@ -7,5 +9,32 @@
 	src="img/element1.png" 
 	image-object name="'pattern'" 
 	callback="vm.loadImage(name, imageData, width, height)">
+
+<!-- <img 
+	src="img/image.png" 
+	image-object name="'image'" 
+	callback="vm.loadImage(name, imageData, width, height)">
+<img 
+	src="img/template.png" 
+	image-object name="'pattern'" 
+	callback="vm.loadImage(name, imageData, width, height)"> -->
+
+<!-- <img 
+	src="img/template.png" 
+	image-object name="'image'" 
+	callback="vm.loadImage(name, imageData, width, height)">
+<img 
+	src="img/element.png" 
+	image-object name="'pattern'" 
+	callback="vm.loadImage(name, imageData, width, height)"> -->
+
+<!-- <img 
+	src="img/image.png" 
+	image-object name="'image'" 
+	callback="vm.loadImage(name, imageData, width, height)">
+<img 
+	src="img/element.png" 
+	image-object name="'pattern'" 
+	callback="vm.loadImage(name, imageData, width, height)"> -->
 
 <div id="canvas-anchor"></div>

@@ -1,9 +1,7 @@
 #canvas-anchor {
 	height: 640px;
   background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
 }
 
 canvas {

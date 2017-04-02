@@ -11,7 +11,7 @@
 	callback="vm.loadImage(name, imageData, width, height)"> -->
 
 <img 
-	src="img/image.png" 
+	src="img/mona_lisa.png" 
 	image-object name="'image'" 
 	callback="vm.loadImage(name, imageData, width, height)">
 <img 
@@ -37,4 +37,10 @@
 	image-object name="'pattern'" 
 	callback="vm.loadImage(name, imageData, width, height)"> -->
 
-<div id="canvas-anchor"></div>
+<div class="canvas-controls">
+	<button ng-click="vm.zoomIn()">+</button>
+	<button ng-click="vm.zoomOut()">-</button>
+</div>
+
+<div id="canvas-anchor">
+</div>

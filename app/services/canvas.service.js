@@ -4,9 +4,11 @@ angular.module('EYE')
 CanvasService.$inject = ['ConfigService'];
 
 function CanvasService(ConfigService) {
-  var CONTEXT = init('canvas-anchor', 900, 630),
+  var CONTEXT = init('canvas-anchor', 1900, 1630),
       CANVAS,
-      cellWidth = ConfigService.cellWidth;
+      cellWidth = ConfigService.cellWidth,
+      container = document.getElementById('canvas-anchor'),
+      zoom = 1;;
       
       CONTEXT.lineWidth = ConfigService.lineWidth;
       // CONTEXT.translate(0.5, 0.5);
@@ -81,11 +83,25 @@ function CanvasService(ConfigService) {
     CONTEXT.clearRect(0, 0, CANVAS.width, CANVAS.height);
   }
 
+  function zoomIn() {
+    zoom += 0.1;
+    container.style.zoom = zoom; 
+    console.log(container.style.zoom);
+  }
+
+  function zoomOut() {
+    zoom -= 0.1;
+    container.style.zoom = zoom;
+    console.log(container.style.zoom);
+  }
+
 	return {
     drawBorder: drawBorder,
     drawGrid: drawGrid,
     drawRect: drawRect,
     encloseCell: encloseCell,
-    clean: clean
+    clean: clean,
+    zoomIn: zoomIn,
+    zoomOut: zoomOut
 	};
 };

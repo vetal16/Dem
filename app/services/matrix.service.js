@@ -16,7 +16,8 @@ function MatrixService() {
 
     for (var i = 0; i < m; i++)
       for (var j = 0; j < n; j++)
-        callback(i, j, matrix[i][j]);
+        if (matrix[i][j])
+          callback(i, j, matrix[i][j]);
   }
 
 	function createRandomMatrix(m, n) {
@@ -48,11 +49,23 @@ function MatrixService() {
 
     return maxElement;
   }
+
+  function findSimilar(matrix, minValue) {
+    var maxElements = [];
+
+    this.walkThrough(matrix, function(i, j, element) {
+      if (element.value >= minValue)
+        maxElements.push(Object.assign({}, element));
+    });
+
+    return maxElements;
+  }
 	return {
     clean: clean,
 		createRandomMatrix: createRandomMatrix,
     walkThrough: walkThrough,
     create2DArray: create2DArray,
-    findMax: findMax
+    findMax: findMax,
+    findSimilar: findSimilar
 	};
 };

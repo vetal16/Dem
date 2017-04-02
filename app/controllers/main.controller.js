@@ -15,6 +15,9 @@ function MainCtrl(MatrixService, CanvasService, ConfigService, $timeout) {
   vm.loadImage = loadImage;
   vm.recognize = recognize;
 
+  vm.zoomIn = zoomIn;
+  vm.zoomOut = zoomOut;
+
 	function recognize() {
 		var matrix = buildCorrelationMatrix(
 		vm.data.image.width,
@@ -28,13 +31,23 @@ function MainCtrl(MatrixService, CanvasService, ConfigService, $timeout) {
 			CanvasService.clean();
 			CanvasService.drawBorder(matrix.length, matrix.length);
 			MatrixService.walkThrough(matrix, function(x, y, element) {
-		  	CanvasService.drawRect(x, y, element.value);
+	  		CanvasService.drawRect(x, y, element.value);
 			});
 
 			var maxElement = MatrixService.findMax(matrix);
 			CanvasService.encloseCell(maxElement.i, maxElement.j);
 
 			console.log('Max', maxElement);
+
+
+
+			var maxElements = MatrixService.findSimilar(matrix, 0.5);
+
+			console.log('Max elements', maxElements);
+
+			maxElements.forEach(function(element) {
+				CanvasService.encloseCell(element.i, element.j);
+			});
 	  }, 1000);
 	}
 	
@@ -42,9 +55,9 @@ function MainCtrl(MatrixService, CanvasService, ConfigService, $timeout) {
 		var image = vm.data.image.imageData,
 				pattern = vm.data.pattern.imageData,
 				i = 0,
-				iMax = patternWidth * (Math.trunc(imageWidth / patternWidth) - 1)
+				iMax = imageWidth - patternWidth,
 				j = 0,
-				jMax = patternHeight * (Math.trunc(imageHeight / patternHeight) - 1),
+				jMax = imageHeight - patternHeight,
 				matrix = MatrixService.create2DArray(Math.trunc(vm.K * imageHeight / patternHeight) - 1),
 				k = 0,
 				l = 0;
@@ -81,14 +94,14 @@ function MainCtrl(MatrixService, CanvasService, ConfigService, $timeout) {
 						MatrixService.clean(pattern.getImageData(0, 0, patternWidth, patternHeight).data))
 				};
 
-				/*console.log('---');
+				console.log('---');
 				console.log('x', i, 'x+', i + patternWidth);
 				console.log('y', j, 'y+', j + patternHeight);
-				console.log('correlation', matrix[k][l]);*/
+				console.log('correlation', matrix[k][l]);
 			}, 0);
 		}
 
-		matrix.length = l;
+		// matrix.length = l;
 		return matrix;
 	}
 
@@ -99,5 +112,13 @@ function MainCtrl(MatrixService, CanvasService, ConfigService, $timeout) {
   		height: height,
   		imageData: imageData
   	};
+  }
+
+  function zoomIn() {
+  	CanvasService.zoomIn();
+  }
+
+  function zoomOut() {
+  	CanvasService.zoomOut();
   }
 };

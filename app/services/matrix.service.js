@@ -5,7 +5,7 @@ function MatrixService() {
 
   function clean(array) {
     var cleanArray = [];
-    for (i = 0; i < array.length; i += 5)
+    for (i = 0; i < array.length; i += 4)
       cleanArray.push(array[i]);
     return cleanArray;
   }

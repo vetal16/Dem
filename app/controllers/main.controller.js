@@ -44,6 +44,15 @@ function MainCtrl(MatrixService, CanvasService, $timeout) {
 				k = 0,
 				l = 0;
 
+		console.log('***');
+		console.log('imageWidth', imageWidth);
+		console.log('imageHeight', imageHeight);
+		console.log('patternWidth', patternWidth);
+		console.log('patternHeight', patternHeight);
+		console.log('iMax', iMax);
+		console.log('jMax', jMax);
+		console.log('***');
+
 		for (j = 0; j <= jMax; j = j + Math.trunc(patternHeight / vm.K)) {	
 			for (i = 0; i <= iMax; i = i + Math.trunc(patternWidth / vm.K)) {
 				loop(i, j, k, l);
@@ -58,7 +67,12 @@ function MainCtrl(MatrixService, CanvasService, $timeout) {
 				matrix[k][l] = ss.sampleCorrelation(
 					MatrixService.clean(image.getImageData(i, j, patternWidth, patternHeight).data),
 					MatrixService.clean(pattern.getImageData(0, 0, patternWidth, patternHeight).data));
-			}, 1);
+
+				/*console.log('---');
+				console.log('x', i, 'x+', i + patternWidth);
+				console.log('y', j, 'y+', j + patternHeight);
+				console.log('correlation', matrix[k][l]);*/
+			}, 0);
 		}
 
 		return matrix;

@@ -1,12 +1,12 @@
 angular.module('EYE')
   .controller('MainCtrl', MainCtrl);
 
-MainCtrl.$inject = ['MatrixService', 'CanvasService', '$timeout'];
+MainCtrl.$inject = ['MatrixService', 'CanvasService', 'ConfigService', '$timeout'];
 
-function MainCtrl(MatrixService, CanvasService, $timeout) {
+function MainCtrl(MatrixService, CanvasService, ConfigService, $timeout) {
   var vm = this;
 
-  vm.K = 2;
+  vm.K = ConfigService.K;
   vm.data = {
   	image: {},
   	pattern: {}
@@ -75,6 +75,7 @@ function MainCtrl(MatrixService, CanvasService, $timeout) {
 			}, 0);
 		}
 
+		matrix.length = l;
 		return matrix;
 	}
 

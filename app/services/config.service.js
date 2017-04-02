@@ -7,7 +7,7 @@ function ConfigService() {
 		K: 5,
 		cellWidth: 15,
 		lineWidth: 1,
-		borderColor: '#F00',
+		borderColor: '#FFF',
 		gridColor: '#000'
 	};
 }

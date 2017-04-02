@@ -34,6 +34,20 @@ function CanvasService(ConfigService) {
       cellWidth - 2 * lineWidth);
   }
 
+  function encloseCell(x, y) {
+    console.error(x, y);
+    var lineWidth = CONTEXT.lineWidth;
+
+    CONTEXT.strokeStyle = '#0F0';
+    CONTEXT.beginPath();
+    CONTEXT.rect(
+      (x + 1) * cellWidth, 
+      (y + 1) * cellWidth, 
+      cellWidth, 
+      cellWidth);
+    CONTEXT.stroke();
+  }
+
   function drawGrid(m, n) {
     for (var i = 1; i <= n + 1; i++)
       drawLine(cellWidth, i * cellWidth, (n + 1) * cellWidth, i * cellWidth);
@@ -71,6 +85,7 @@ function CanvasService(ConfigService) {
     drawBorder: drawBorder,
     drawGrid: drawGrid,
     drawRect: drawRect,
+    encloseCell: encloseCell,
     clean: clean
 	};
 };

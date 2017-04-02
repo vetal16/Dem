@@ -27,9 +27,14 @@ function MainCtrl(MatrixService, CanvasService, ConfigService, $timeout) {
 		$timeout(function() {
 			CanvasService.clean();
 			CanvasService.drawBorder(matrix.length, matrix.length);
-			MatrixService.walkThrough(matrix, function(x, y, value) {
-		  	CanvasService.drawRect(x, y, value);
-		  });
+			MatrixService.walkThrough(matrix, function(x, y, element) {
+		  	CanvasService.drawRect(x, y, element.value);
+			});
+
+			var maxElement = MatrixService.findMax(matrix);
+			CanvasService.encloseCell(maxElement.i, maxElement.j);
+
+			console.log('Max', maxElement);
 	  }, 1000);
 	}
 	
@@ -64,9 +69,17 @@ function MainCtrl(MatrixService, CanvasService, ConfigService, $timeout) {
 
 		function loop(i, j, k, l) {
 			$timeout(function() {
-				matrix[k][l] = ss.sampleCorrelation(
-					MatrixService.clean(image.getImageData(i, j, patternWidth, patternHeight).data),
-					MatrixService.clean(pattern.getImageData(0, 0, patternWidth, patternHeight).data));
+				matrix[k][l] = {
+					x0: i,
+					y0: j,
+					i: k,
+					j: l,
+					deltaX: patternWidth,
+					deltaY: patternHeight,
+					value: ss.sampleCorrelation(
+						MatrixService.clean(image.getImageData(i, j, patternWidth, patternHeight).data),
+						MatrixService.clean(pattern.getImageData(0, 0, patternWidth, patternHeight).data))
+				};
 
 				/*console.log('---');
 				console.log('x', i, 'x+', i + patternWidth);

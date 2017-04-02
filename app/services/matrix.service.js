@@ -37,10 +37,22 @@ function MatrixService() {
     }
     return arr;
   }
+
+  function findMax(matrix) {
+    var maxElement = matrix[0][0];
+
+    this.walkThrough(matrix, function(i, j, element) {
+      if (element.value > maxElement.value)
+        maxElement = Object.assign({}, element);
+    });
+
+    return maxElement;
+  }
 	return {
     clean: clean,
 		createRandomMatrix: createRandomMatrix,
     walkThrough: walkThrough,
-    create2DArray: create2DArray
+    create2DArray: create2DArray,
+    findMax: findMax
 	};
 };
